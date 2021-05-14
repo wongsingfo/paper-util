@@ -1,8 +1,8 @@
 ### Environment
 
-outputfile="output"
+outputfile="cdf"
 N=2
-array datafiles[N] = ["../normal.txt", "../normal2.txt"]
+array datafiles[N] = ["normal.txt", "normal2.txt"]
 array titles[N] = ["Distribution 1", "Distribution 2"]
 
 ### Output
