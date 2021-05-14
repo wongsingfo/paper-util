@@ -10,3 +10,10 @@ array datafiles[N] = ["normal.txt", "normal2.txt"]
 array titles[N] = ["Distribution 1", "Distribution 2"]
 ```
 
+## Stacked bar
+
+![](./stack.png)
+
+```
+inputfile = "stack.txt"
+```

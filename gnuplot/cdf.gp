@@ -1,15 +1,17 @@
 ### Environment
 
-outputfile="cdf"
+outputfile = "cdf"
+default_font = "Arial,24"
+
 N=2
 array datafiles[N] = ["normal.txt", "normal2.txt"]
 array titles[N] = ["Distribution 1", "Distribution 2"]
 
 ### Output
 
-set terminal postscript eps color "Arial" 28
+set terminal postscript eps color default_font
 set size 1,1
-set key font "Arial,24"
+set key font default_font
 set key left top
 set output sprintf("%s.eps", outputfile)
 
