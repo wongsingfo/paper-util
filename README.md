@@ -28,3 +28,7 @@ Examples:
     ./google_scholar.py 'Snap: a Microkernel Approach to Host Network' -f ref.bib
 ```
 
+## gnuplot
+
+Gnuplot scirpts.
+
