@@ -1,5 +1,7 @@
 # Gnuplot scripts
 
+Gnuplot 5.0+ is required to run these scripts.
+
 ## CDF
 
 ![](./cdf.png)
