@@ -4,6 +4,8 @@ outputfile = "histogram"
 default_font = "Arial,24"
 
 inputfile = "histogram.txt"
+N = 2
+array titles[N] = ["P", "Q"]
 
 ### Output
 
@@ -25,7 +27,7 @@ set yrange [0:]
 ### Main routine
 
 # set arrow 1 nohead from graph 0,0 to graph 1,1 
-plot inputfile using ($2):($3):xtic(1) notitle, 100 title "line"
+plot for [i=1:N] inputfile using (column(i*2)):(column(i*2+1)):xtic(1) t titles[i], 100 title "line"
 
 ### Output variants
 
