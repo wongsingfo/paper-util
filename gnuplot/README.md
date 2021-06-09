@@ -4,7 +4,7 @@ Gnuplot 5.0+ is required to run these scripts.
 
 ## Histogram
 
-![](./histogram.png)
+<img src="histogram.png" width="300" />
 
 ```
 inputfile = "histogram.txt"
@@ -12,7 +12,7 @@ inputfile = "histogram.txt"
 
 ## CDF
 
-![](./cdf.png)
+<img src="cdf.png" width="300" />
 
 ```
 N=2
@@ -24,7 +24,7 @@ It doesn't need to sort the data files.
 
 ## Stacked bar
 
-![](./stack.png)
+<img src="stack.png" width="300" />
 
 ```
 inputfile = "stack.txt"
