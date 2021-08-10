@@ -2,7 +2,7 @@
 
 Gnuplot 5.0+ is required to run these scripts.
 
-## [Histogram](histogram.gp)
+## [Histogram](histogram)
 
 <img src="histogram.png" width="300" />
 
@@ -10,7 +10,7 @@ Gnuplot 5.0+ is required to run these scripts.
 inputfile = "histogram.txt"
 ```
 
-## [CDF](cdf.gp)
+## [CDF](cdf)
 
 <img src="cdf.png" width="300" />
 
@@ -22,7 +22,7 @@ array titles[N] = ["Distribution 1", "Distribution 2"]
 
 It doesn't need to sort the data files.
 
-## [Stacked bar](stack.gp)
+## [Stacked bar](stack)
 
 <img src="stack.png" width="300" />
 

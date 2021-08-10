@@ -1,18 +1,9 @@
-### Environment
-
 outputfile = "histogram"
-default_font = "Arial,24"
+load '../header.gp'
 
 inputfile = "histogram.txt"
 N = 2
 array titles[N] = ["P", "Q"]
-
-### Output
-
-set terminal postscript eps color default_font
-set size 1,1
-set key font default_font
-set output sprintf("%s.eps", outputfile)
 
 ### Labels
 
@@ -29,11 +20,4 @@ set yrange [0:]
 # set arrow 1 nohead from graph 0,0 to graph 1,1 
 plot for [i=1:N] inputfile using (column(i*2)):(column(i*2+1)):xtic(1) t titles[i], 100 title "line"
 
-### Output variants
-
-set output sprintf("| ps2pdf -dEPSCrop %s.eps %s.pdf", outputfile, outputfile)
-replot
-
-set size 1,0.75
-set output sprintf("%s_w.eps", outputfile)
-replot
+load '../footer.gp'
