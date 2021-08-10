@@ -1,3 +1,5 @@
+set macros
+
 default_font = "Arial,18"
 
 # Double column format with each column having dimensions
