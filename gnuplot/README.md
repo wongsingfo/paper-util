@@ -2,30 +2,14 @@
 
 Gnuplot 5.0+ is required to run these scripts.
 
-## [Histogram](histogram)
-
-<img src="histogram.png" width="300" />
+Run the command below to generate all figures.
 
 ```
-inputfile = "histogram.txt"
+gnuplot plot.gp
 ```
 
-## [CDF](cdf)
+<img src="01.png" width="280" />
 
-<img src="cdf.png" width="300" />
+<img src="02.png" width="280" />
 
-```
-N=2
-array datafiles[N] = ["normal.txt", "normal2.txt"]
-array titles[N] = ["Distribution 1", "Distribution 2"]
-```
-
-It doesn't need to sort the data files.
-
-## [Stacked bar](stack)
-
-<img src="stack.png" width="300" />
-
-```
-inputfile = "stack.txt"
-```
+<img src="03.png" width="280" />
