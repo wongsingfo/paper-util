@@ -13,8 +13,6 @@ set yrange [0:30]
 # newhistogram {"<title>" {font "name,size"} {tc <colorspec>}} 
 #              {lt <linetype>} {fs <fillstyle>} {at <x-coord>}
 
-array his_titles[5]=['1.3','1.5','1.7','1.8','2.0']
-
 fill_option='fillstyle pattern 4+i lc i+1'
 
 plot newhistogram "1.3", 'newhistogram.txt' u 2:xtic(1) t "used" fs pattern 4,\
