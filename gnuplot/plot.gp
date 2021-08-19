@@ -7,5 +7,6 @@ reset session
 load '03-stack.gp'
 reset session
 load '04-boxplot.gp'
-
+reset session
+load '05-label.gp'
 
