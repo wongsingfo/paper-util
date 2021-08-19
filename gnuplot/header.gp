@@ -83,6 +83,8 @@ set linetype 6 lc rgb '#4CBDED' # dark banana
 set linetype 7 lc rgb '#A1132E' # brown
 set linetype 8 lc rgb '#F781BF' # pink
 
+# Default settings
 set grid y
+set style fill pattern 4 
 
 set output sprintf("%s.eps", outputfile)
