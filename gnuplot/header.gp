@@ -74,17 +74,23 @@ set palette defined ( 0 '#D73027',\
 		      7 '#1A9850' )
 
 # matlab.pal
-set linetype 1 lc rgb '#0071BC' # red
-set linetype 2 lc rgb '#D85218' # blue
-set linetype 3 lc rgb '#ECB01F' # green
-set linetype 4 lc rgb '#7D2E8D' # purple
-set linetype 5 lc rgb '#76AB2F' # orange
-set linetype 6 lc rgb '#4CBDED' # dark banana
-set linetype 7 lc rgb '#A1132E' # brown
-set linetype 8 lc rgb '#F781BF' # pink
+
+# Linestyles vs linetypes:
+#    A linestyle is a temporary association of properties, while
+# linetypes are permanent.
+linetype_properties = "lw 4 ps 2"
+set linetype 1 lc rgb '#0071BC' pt 5 @linetype_properties # red
+set linetype 2 lc rgb '#D85218' pt 7 @linetype_properties # blue
+set linetype 3 lc rgb '#ECB01F' pt 9 @linetype_properties # green
+set linetype 4 lc rgb '#7D2E8D' pt 11 @linetype_properties # purple
+set linetype 5 lc rgb '#76AB2F' pt 13 @linetype_properties # orange
+set linetype 6 lc rgb '#4CBDED' pt 15 @linetype_properties # dark banana
+set linetype 7 lc rgb '#A1132E' pt 3 @linetype_properties # brown
+set linetype 8 lc rgb '#F781BF' pt 4 @linetype_properties # pink
 
 # Default settings
 set grid y
-set style fill pattern 4 
+set style fill transparent pattern 4 border
+# set style fill transparent solid 0.2
 
 set output sprintf("%s.eps", outputfile)

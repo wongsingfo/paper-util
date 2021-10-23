@@ -9,7 +9,6 @@ set key top left
 set style histogram rowstacked # or columnstacked
 set style data histogram
 # set key autotitle columnheader
-set style fill pattern 4 border
 set boxwidth 0.6
 set ylabel 'CPU usage(%)' font default_font
 set xtics rotate by 330 font default_font

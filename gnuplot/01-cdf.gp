@@ -13,7 +13,7 @@ set xrange [-3:4]
 array line_counts[N]
 do for [i = 1:N] { line_counts[i] = system(sprintf("cat %s | wc -l", datafiles[i])) }
 plot for [i = 1:N] datafiles[i] u 1:(100.0/line_counts[i]) smooth cumulative w lp \
-    ps 1.2 pointinterval 80 lw 3 title titles[i]
+    pointinterval 70 title titles[i]
 
 call 'footer.gp'
 

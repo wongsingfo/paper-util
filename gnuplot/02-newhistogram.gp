@@ -3,7 +3,6 @@ call 'header.gp' 02
 set key left top
 set style data histograms
 set style histogram rowstacked title offset 0,0.2 
-set style fill pattern 4
 set bmargin 5
 set xlabel "Utilization" offset 0,-0.4
 set ylabel "Number of pieces used"
