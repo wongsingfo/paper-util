@@ -1,3 +1,5 @@
+# Author: Chengke Wang (chengke@pku.edu.cn)
+
 # This script accepts three arguments:
 #   ARG1: The output file name
 #   ARG2: Size scale in X dimension
