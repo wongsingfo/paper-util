@@ -5,3 +5,5 @@ gnuplot/**/*.pdf
 gnuplot/**/*.eps
 
 scholar.log
+
+kuroko/**/*.pdf

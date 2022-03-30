@@ -66,14 +66,15 @@ print 'Output: '.outputfile.'.{eps,pdf}'
 
 # palette: rdylgn.pal
 set palette maxcolors 8
-set palette defined ( 0 '#D73027',\
-    	    	      1 '#F46D43',\
-		      2 '#FDAE61',\
-		      3 '#FEE08B',\
-		      4 '#D9EF8B',\
-		      5 '#A6D96A',\
-		      6 '#66BD63',\
-		      7 '#1A9850' )
+set palette defined (\
+		0 '#D73027',\
+		1 '#F46D43',\
+		2 '#FDAE61',\
+		3 '#FEE08B',\
+		4 '#D9EF8B',\
+		5 '#A6D96A',\
+		6 '#66BD63',\
+		7 '#1A9850' )
 
 # matlab.pal
 
