@@ -90,12 +90,12 @@ filename = 'cdf.csv'
 N = 2
 array line_counts[N]
 
-do for [i=1:2] {
+do for [i=1:N] {
     stats filename using i name "STATS" nooutput
     line_counts[i] = STATS_records
 }
 
-plot for [i=1:2] filename using i:(100.0/line_counts[i]) \
+plot for [i=1:N] filename using i:(100.0/line_counts[i]) \
     smooth cumulative title columnhead(i) with l
 
 reset session
