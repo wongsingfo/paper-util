@@ -85,7 +85,7 @@ set palette defined (\
 # Linestyles vs linetypes:
 #    A linestyle is a temporary association of properties, while
 # linetypes are permanent.
-linetype_properties = "lw 2 ps 2"
+linetype_properties = "lw 2 ps 0.5"
 set linetype 1 lc rgb '#0071BC' pt 5 @linetype_properties # red
 set linetype 2 lc rgb '#D85218' pt 7 @linetype_properties # blue
 set linetype 3 lc rgb '#ECB01F' pt 9 @linetype_properties # green
