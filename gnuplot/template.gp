@@ -1,5 +1,7 @@
 # Author: Chengke Wang (chengke@pku.edu.cn)
 
+# Call the script with the following line:
+#   call template.gp <output_file> <scale_X> <scale_Y>
 # This script accepts three arguments:
 #   ARG1: The output file name
 #   ARG2: Size scale in X dimension
@@ -25,18 +27,17 @@ set print '-'
 
 is_empty_string(str) = '' eq str
 
-# Double column format with each column having dimensions
-# 9.25 inches x 3.33 inches, a space of 0.33 inches between
-# the two columns.
+# Submissions must be in two-column format, using 10-point type on 12-point
+# (single-spaced) leading, in a text block 7'' wide x 9'' deep, with .33''
+# inter-column space, formatted for 8.5'' x 11'' paper.
+#
+# 1 in = 96 px
 
-# 3:2
 plot_width=3.33
-plot_height=2.22
+plot_height=plot_width / 3 * 2
 
-# 16:9
-# plot_height=1.873
-
-default_font = "Arial,18"
+# Gnuplot use a defalut font scale of 0.5
+default_font = "Arial,12"
 
 if (!is_empty_string(arg1)) {
         outputfile=arg1
@@ -46,8 +47,11 @@ if (!is_empty_string(arg2)) {
         plot_height = plot_height * (is_empty_string(arg3) ? arg2 : arg3)
 }
 
-set terminal postscript eps color default_font size plot_width,plot_height
-print 'Output: '.outputfile.'.{eps,pdf}'
+# set terminal postscript eps color default_font size plot_width,plot_height
+# set output sprintf("%s.eps", outputfile)
+
+set terminal pdfcairo enhanced color font default_font size plot_width,plot_height
+set output sprintf("%s.pdf", outputfile)
 
 ## Set styles, use the command `test` to see the example.
 
@@ -81,7 +85,7 @@ set palette defined (\
 # Linestyles vs linetypes:
 #    A linestyle is a temporary association of properties, while
 # linetypes are permanent.
-linetype_properties = "lw 4 ps 2"
+linetype_properties = "lw 2 ps 2"
 set linetype 1 lc rgb '#0071BC' pt 5 @linetype_properties # red
 set linetype 2 lc rgb '#D85218' pt 7 @linetype_properties # blue
 set linetype 3 lc rgb '#ECB01F' pt 9 @linetype_properties # green
@@ -95,5 +99,3 @@ set linetype 8 lc rgb '#F781BF' pt 4 @linetype_properties # pink
 set grid y
 set style fill transparent pattern 4 border
 # set style fill transparent solid 0.2
-
-set output sprintf("%s.eps", outputfile)
