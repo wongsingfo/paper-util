@@ -43,6 +43,8 @@ call '../template.gp' '02-label'
 
 set xrange[-pi:2*pi]
 
+set object 1 rectangle from graph 0,0 to first 0.8, graph 1
+set object 1 fillstyle transparent solid 0.5 noborder fc ls 1
 set arrow from -0.5,sin(-0.5) to pi+0.5,sin(pi+0.5) filled lc 5
 set arrow from -0.4,sin(-0.4) to pi+0.4,sin(pi+0.4) nohead lw 5 dt 3 lc 2
 set arrow from -0.6,sin(-0.6) to pi+0.6,sin(pi+0.6) heads lw 3 lc 3
@@ -97,7 +99,7 @@ do for [i=1:N] {
 }
 
 plot for [i=1:N] filename using i:(100.0/line_counts[i]) \
-    smooth cumulative title columnhead(i) with l
+    smooth cumulative title columnhead(i) with lp pn 5
 
 reset session
 call '../template.gp' '05-newhistogram'
