@@ -127,3 +127,35 @@ plot newhistogram "1.3", 'newhistogram.txt' u 2:xtic(1) t "used" fs pattern 4,\
     newhistogram "1.7", for [i=0:2] '' u (column(8+i)):xtic(1)  @fill_option notitle,\
     newhistogram "1.8", for [i=0:2] '' u (column(11+i)):xtic(1) @fill_option notitle,\
     newhistogram '2.0', for [i=0:2] '' u (column(14+i)):xtic(1) @fill_option notitle,\
+
+
+reset session
+call '../template.gp' '06-lines'
+
+# Bessel functions (after Bronstein 2001, eq. 9.54a)
+besj2(x) = 2*1/x * besj1(x) - besj0(x)
+besj3(x) = 2*2/x * besj2(x) - besj1(x)
+besj4(x) = 2*3/x * besj3(x) - besj2(x)
+besj5(x) = 2*4/x * besj4(x) - besj3(x)
+besj6(x) = 2*5/x * besj5(x) - besj4(x)
+besj0_(x) = x<5 ? besj0(x) : 1/0
+
+set label 'J_0' at 1.4,0.90 center tc lt 1
+set label 'J_1' at 1.9,0.67 center tc lt 2
+set label 'J_2' at 3.2,0.57 center tc lt 3
+set label 'J_3' at 4.3,0.51 center tc lt 4
+set label 'J_4' at 5.4,0.48 center tc lt 5
+set label 'J_5' at 6.5,0.45 center tc lt 6
+set label 'J_6' at 7.6,0.43 center tc lt 7
+
+set xrange [0:15]
+unset key
+
+line_options = 'w lp pn 6'
+plot besj0(x) @line_options, \
+     besj1(x) @line_options, \
+     besj2(x) @line_options, \
+     besj3(x) @line_options, \
+     besj4(x) @line_options, \
+     besj5(x) @line_options, \
+     besj6(x) @line_options

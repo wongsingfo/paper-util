@@ -55,47 +55,41 @@ set output sprintf("%s.pdf", outputfile)
 
 ## Set styles, use the command `test` to see the example.
 
-## Set linetypes
-# usage: plot sin linetype { id | rgb hex }
+## Color scheme that is friendly to colorblind people
+# Tol, Paul. 2021. “Colour Schemes.” Technical note SRON/EPS/TN/09-002 3.2. SRON.
+# link: https://personal.sron.nl/~pault/data/colourschemes.pdf
 
-# Palettes:
-# https://github.com/Gnuplotting/gnuplot-palettes
-
-# line styles for ColorBrewer Dark2
-# for use with qualitative/categorical data
-# provides 8 dark colors based on Set2
-# compatible with gnuplot >=4.2
-# author: Anna Schneider
-
-
-# palette: rdylgn.pal
-set palette maxcolors 8
+# Diverging Colour Schemes
 set palette defined (\
-		0 '#D73027',\
-		1 '#F46D43',\
-		2 '#FDAE61',\
-		3 '#FEE08B',\
-		4 '#D9EF8B',\
-		5 '#A6D96A',\
-		6 '#66BD63',\
-		7 '#1A9850' )
+0 '#364B9A',\
+1 '#4A7BB7',\
+2 '#6EA6CD',\
+3 '#98CAE1',\
+4 '#C2E4EF',\
+5 '#EAECCC',\
+6 '#FEDA8B',\
+7 '#FDB366',\
+8 '#F67E4B',\
+9 '#DD3D2D',\
+10 '#A50026')
 
-# matlab.pal
-
-# Linestyles vs linetypes:
-#    A linestyle is a temporary association of properties, while
-# linetypes are permanent.
-linetype_properties = "lw 2 ps 0.5"
-set linetype 1 lc rgb '#0071BC' pt 5 @linetype_properties # red
-set linetype 2 lc rgb '#D85218' pt 7 @linetype_properties # blue
-set linetype 3 lc rgb '#ECB01F' pt 9 @linetype_properties # green
-set linetype 4 lc rgb '#7D2E8D' pt 11 @linetype_properties # purple
-set linetype 5 lc rgb '#76AB2F' pt 13 @linetype_properties # orange
-set linetype 6 lc rgb '#4CBDED' pt 15 @linetype_properties # dark banana
-set linetype 7 lc rgb '#A1132E' pt 3 @linetype_properties # brown
-set linetype 8 lc rgb '#F781BF' pt 4 @linetype_properties # pink
+# Qualitative Colour Schemes
+set linetype 1 lc rgb '#4477AA' pt 4  # blue
+set linetype 2 lc rgb '#EE6677' pt 6  # red
+set linetype 3 lc rgb '#228833' pt 8  # green
+set linetype 4 lc rgb '#CCBB44' pt 10 # yellow
+set linetype 5 lc rgb '#66CCEE' pt 12 # cyan
+set linetype 6 lc rgb '#AA3377' pt 14 # purple
+set linetype 7 lc rgb '#BBBBBB' pt 3  # grey
 
 # Default settings
 set grid y
-set style fill transparent pattern 4 border
-# set style fill transparent solid 0.2
+set style fill transparent pattern 4
+# set style fill transparent solid 0.5 border -1
+
+## Common Questions
+#
+# Q: What is difference between linestyle and linetype?
+# A: A linestyle is a temporary association of properties, while linetypes are
+# permanent (that is, they are not affected by the reset command).
+#
