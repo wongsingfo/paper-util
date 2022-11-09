@@ -103,6 +103,7 @@ plot for [i=1:N] filename using i:(100.0/line_counts[i]) \
 
 reset session
 call '../template.gp' '05-newhistogram'
+set datafile nocolumnheaders
 
 # set key samplen 2
 set key maxrows 1

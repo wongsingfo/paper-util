@@ -84,8 +84,8 @@ set linetype 7 lc rgb '#BBBBBB' pt 3  # grey
 
 # Default settings
 set grid y
-set style fill transparent pattern 4
-# set style fill transparent solid 0.5 border -1
+# set style fill transparent pattern 4  # Use multiplot to draw the pattern!
+set style fill transparent solid 1.0 border -1
 
 ## Common Questions
 #
