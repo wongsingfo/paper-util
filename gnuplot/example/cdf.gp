@@ -1,7 +1,7 @@
 call '../template.gp' 'cdf'
 
 # datafile in CSV
-set datafile separator ','
+set datafile separator comma
 set datafile columnheaders
 
 set yrange [0:100]
