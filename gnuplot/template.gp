@@ -47,16 +47,16 @@ if (!is_empty_string(arg2)) {
         plot_height = plot_height * (is_empty_string(arg3) ? arg2 : arg3)
 }
 
+# ------------------------------------------------------------------------------
 # set terminal postscript eps color default_font size plot_width,plot_height
 # set output sprintf("%s.eps", outputfile)
 
 set terminal pdfcairo enhanced color font default_font size plot_width,plot_height
 set output sprintf("%s.pdf", outputfile)
 
-## Set styles, use the command `test` to see the example.
-
-## Color scheme that is friendly to colorblind people
-# Tol, Paul. 2021. “Colour Schemes.” Technical note SRON/EPS/TN/09-002 3.2. SRON.
+# ------------------------------------------------------------------------------
+# Color scheme that is friendly to colorblind people
+# Tol, Paul. 2021. “Colour Schemes.” Technical note SRON/EPS/TN/09-002 3.2. SRON
 # link: https://personal.sron.nl/~pault/data/colourschemes.pdf
 
 # Diverging Colour Schemes
@@ -82,14 +82,20 @@ set linetype 5 lc rgb '#66CCEE' pt 12 # cyan
 set linetype 6 lc rgb '#AA3377' pt 14 # purple
 set linetype 7 lc rgb '#BBBBBB' pt 3  # grey
 
+# ------------------------------------------------------------------------------
 # Default settings
 set grid y
-# set style fill transparent pattern 4  # Use multiplot to draw the pattern!
+# set style fill transparent pattern 4
 set style fill transparent solid 1.0 border -1
 
-## Common Questions
+# ------------------------------------------------------------------------------
+# Common Questions
 #
 # Q: What is difference between linestyle and linetype?
 # A: A linestyle is a temporary association of properties, while linetypes are
 # permanent (that is, they are not affected by the reset command).
+#
+# Q: How to fill the histogram with both solid color and pattern?
+# A: Ops, Gnuplot does not support this. A workaournd is to use multiplot to
+# draw the pattern.
 #
