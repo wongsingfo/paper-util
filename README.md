@@ -1,5 +1,6 @@
 # paper-util
-Utilities for paper writing.
+
+This repo includes utilities for paper writing.
 
 ## google_scholar.py
 
@@ -55,4 +56,8 @@ Usage:
   kuroko -k
     Check whether a dedicated printer is installed.
 ```
+
+## Latex Table
+
+https://tableconvert.com/latex-generator
 
