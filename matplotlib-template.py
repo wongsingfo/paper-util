@@ -3,26 +3,24 @@ from matplotlib import patches, ticker
 import argparse
 import json
 import matplotlib.colors as mcolors
+import matplotlib.font_manager as font_manager
 import matplotlib.pyplot as plt
-import sys
 import numpy as np
 import os
 import pandas as pd
 import pyoverleaf
+import re
+import sys
 
-## Global configuration
 
-# constrained_layout automatically adjusts subplots and decorations like legends and colorbars
-# so that they fit in the figure window while still preserving, as best they can, the logical
-# layout requested by the user. constrained_layout is similar to tight_layout, but uses a constraint
-# solver to determine the size of axes that allows them to fit.
+## Presets
 
 linestyle_str = [
     ("solid", "solid"),  # Same as (0, ()) or '-'
     ("dotted", "dotted"),  # Same as (0, (1, 1)) or ':'
     ("dashed", "dashed"),  # Same as '--'
-    ("dashdot", "dashdot"),
-]  # Same as '-.'
+    ("dashdot", "dashdot"),  # Same as '-.'
+]
 
 linestyle_tuple = [
     ("loosely dotted", (0, (1, 10))),
@@ -40,20 +38,33 @@ linestyle_tuple = [
     ("densely dashdotdotted", (0, (3, 1, 1, 1, 1, 1))),
 ]
 
-# ['#3853a4', '#146533', '#ed1f24', '#708191', '#faa51a', '#b9519f']
-# palette = ['#EE6677', '#4477AA', '#8ECFC9', '#FFBE7A', '#BEB8DC', '#E7DAD2']  # Genshin by Yuhan
-palette = ["#F27970", "#BB9727", "#54B345", "#32B897", "#05B9E2", "#8983BF"]
-patterns = [
-    "",
-    "/",
-    "\\",
-    "x",
-    ".",
-    "o",
-]  #  "|" , "-" , "+" , "x", "o", "O", ".", "*" ]
+
+# Take a color in hexadecimal format and return a new color with a certain
+# level of transparency applied to it.
+def get_transparent_color(color, transparency=0.5):
+    c = mcolors.hex2color(color)
+    c = [*map(lambda x: x * transparency + (1.0 - transparency), mcolors.hex2color(c))]
+    hex_color = "#{:02X}{:02X}{:02X}".format(
+        int(c[0] * 255), int(c[1] * 255), int(c[2] * 255)
+    )
+    return hex_color
+
+
+# palette = ['#EE6677', '#4477AA', '#8ECFC9', '#FFBE7A', '#BEB8DC', '#E7DAD2'] # Genshin by Yuhan
+# palette = ["#F27970", "#BB9727", "#54B345", "#32B897", "#05B9E2", "#8983BF"] # Rainblow
+palette = ["#3853a4", "#146533", "#ed1f24", "#708191", "#faa51a", "#b9519f"]  # Contrast
+# patterns = [ "|" , "-" , "+" , "x", "o", "O", ".", "*" ]
+patterns = ["", "/", "\\", "x", ".", "o"]
 linestyles = ["-", "--", ":", "-.", (0, (3, 1, 1, 1, 1, 1)), (5, (10, 3))]
 markers = ["v", "*", ".", "s", "1", "x"]
+# `colors` for border lines and `colors_fill` for filled areas
+colors = plt.rcParams["axes.prop_cycle"].by_key()["color"]
+colors_fill = list(map(get_transparent_color, colors))
 
+
+## Global configuration
+
+# FIXME: sometimes the axes are not aligned when generating PDF
 plt.rcParams["figure.constrained_layout.use"] = True
 
 plt.rcParams["figure.figsize"] = [4.0, 3.0]
@@ -73,27 +84,32 @@ plt.rcParams["xtick.direction"] = "in"
 plt.rcParams["ytick.direction"] = "in"
 plt.rcParams["axes.prop_cycle"] = cycler(color=palette) + cycler(linestyle=linestyles)
 
+## Helper Functions
 
-transparency = 0.5
+
+def savefig(args, filename):
+    plt.savefig(filename)
+    upload(args, filename)
 
 
-def get_transparent_color(color):
-    c = mcolors.hex2color(color)
-    c = tuple(
-        map(lambda x: x * transparency + (1.0 - transparency), mcolors.hex2color(c))
+def upload(args, filename):
+    if not args.upload:
+        # print("If you want to upload, please set --upload")
+        return
+
+    with open(filename, "rb") as fin:
+        file_bytes = fin.read()
+
+    outfile = os.path.basename(filename)
+    print("Uploading", outfile, end=" ...")
+    sys.stdout.flush()
+    args.overleaf_api.project_upload_file(
+        args.overleaf_project_id, args.overleaf_folder_id, outfile, file_bytes
     )
-    hex_color = "#{:02X}{:02X}{:02X}".format(
-        int(c[0] * 255), int(c[1] * 255), int(c[2] * 255)
-    )
-    return hex_color
+    print(" Done")
 
 
-# `colors` for border lines and `colors_fill` for filled areas
-colors = plt.rcParams["axes.prop_cycle"].by_key()["color"]
-colors_fill = list(map(get_transparent_color, colors))
-
-
-def generate_test_fig(args):
+def plot_test_figure(args):
     x = np.arange(0, 4, 0.05)
 
     fig, ax = plt.subplots()
@@ -125,28 +141,18 @@ def generate_test_fig(args):
         labelspacing=0.3,
     )
 
-    savefig(args, "figure-chengke/test.pdf")
+    savefig(args, args.output)
 
 
-def savefig(args, filename):
-    plt.savefig(filename)
-    upload(args, filename)
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--input", type=str, help="Input file path")
+    parser.add_argument("--output", type=str, default="test.pdf")
+    parser.add_argument("--upload", help="Upload to Overleaf", action="store_true")
+    parser.add_argument("--plot", type=str, default="test_figure")
 
+    args = parser.parse_args()
 
-def upload(args, filename):
-    if not args.upload:
-        # print("If you want to upload, please set --upload")
-        return
-
-    with open(filename, "rb") as fin:
-        file_bytes = fin.read()
-
-    outfile = os.path.basename(filename)
-    print("Uploading", outfile, end=" ...")
-    sys.stdout.flush()
-    args.overleaf_api.project_upload_file(
-        args.overleaf_project_id, args.overleaf_folder_id, outfile, file_bytes
-    )
-    print(" Done")
-
-
+    function_name = f"plot_{args.plot}"
+    function = globals()[function_name]
+    function(args)
