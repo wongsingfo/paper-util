@@ -56,6 +56,7 @@ palette = ["#3853a4", "#146533", "#ed1f24", "#708191", "#faa51a", "#b9519f"]  # 
 # patterns = [ "|" , "-" , "+" , "x", "o", "O", ".", "*" ]
 patterns = ["", "/", "\\", "x", ".", "o"]
 linestyles = ["-", "--", ":", "-.", (0, (3, 1, 1, 1, 1, 1)), (5, (10, 3))]
+# See: https://matplotlib.org/stable/gallery/lines_bars_and_markers/marker_reference.html
 markers = ["v", "*", ".", "s", "1", "x"]
 # `colors` for border lines and `colors_fill` for filled areas
 colors = plt.rcParams["axes.prop_cycle"].by_key()["color"]
@@ -64,14 +65,13 @@ colors_fill = list(map(get_transparent_color, colors))
 
 ## Global configuration
 
-# FIXME: sometimes the axes are not aligned when generating PDF
-plt.rcParams["figure.constrained_layout.use"] = True
+# WARNING: sometimes the axes are not aligned when generating PDF.
+# plt.rcParams["figure.constrained_layout.use"] = True
+# plt.rcParams["savefig.bbox"] = "tight"
 
 plt.rcParams["figure.figsize"] = [4.0, 3.0]
 plt.rcParams["figure.dpi"] = 80
 plt.rcParams["savefig.dpi"] = 300
-plt.rcParams["savefig.bbox"] = "tight"
-
 plt.rcParams["font.size"] = 18
 plt.rcParams["font.family"] = "Arial"
 plt.rcParams["legend.fontsize"] = "medium"
@@ -128,6 +128,7 @@ def plot_test_figure(args):
 
     ax.grid(True)
 
+    # https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.legend.html
     ax.legend(
         loc="upper center",
         frameon=False,
