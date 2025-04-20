@@ -50,14 +50,19 @@ def get_transparent_color(color, transparency=0.5):
     return hex_color
 
 
-# palette = ['#EE6677', '#4477AA', '#8ECFC9', '#FFBE7A', '#BEB8DC', '#E7DAD2'] # Genshin by Yuhan
-# palette = ["#F27970", "#BB9727", "#54B345", "#32B897", "#05B9E2", "#8983BF"] # Rainblow
-palette = ["#3853a4", "#146533", "#ed1f24", "#708191", "#faa51a", "#b9519f"]  # Contrast
-# patterns = [ "|" , "-" , "+" , "x", "o", "O", ".", "*" ]
+palette = ['#EE6677', '#4477AA', '#8ECFC9', '#FFBE7A', '#BEB8DC', '#E7DAD2'] # Genshin by Yuhan
+palette = ["#F27970", "#BB9727", "#54B345", "#32B897", "#05B9E2", "#8983BF"] # Rainblow
+palette = ["#3853a4", "#146533", "#ed1f24", "#708191", "#faa51a", "#b9519f"] # Contrast
+
+patterns = [ "|" , "-" , "+" , "x", "o", "O", ".", "*" ]
 patterns = ["", "/", "\\", "x", ".", "o"]
+patterns = ["", "/", "\\", ".", "o", "//", "\\\\", "|", "-", "+", "x", "*"]
+
 linestyles = ["-", "--", ":", "-.", (0, (3, 1, 1, 1, 1, 1)), (5, (10, 3))]
+
 # See: https://matplotlib.org/stable/gallery/lines_bars_and_markers/marker_reference.html
 markers = ["v", "*", ".", "s", "1", "x"]
+
 # `colors` for border lines and `colors_fill` for filled areas
 colors = plt.rcParams["axes.prop_cycle"].by_key()["color"]
 colors_fill = list(map(get_transparent_color, colors))
@@ -68,6 +73,19 @@ colors_fill = list(map(get_transparent_color, colors))
 # WARNING: sometimes the axes are not aligned when generating PDF.
 # plt.rcParams["figure.constrained_layout.use"] = True
 # plt.rcParams["savefig.bbox"] = "tight"
+
+# This is to make the font type of the PDF and PS files to be Type 42,
+# which is required by most of the conference papers.
+plt.rcParams['pdf.fonttype'] = 42
+plt.rcParams['ps.fonttype'] = 42
+
+# Use `plt.subplots_adjust(left=0.5)` to adjust.
+plt.rcParams["figure.subplot.left"] = 0.2
+plt.rcParams["figure.subplot.right"] = 0.9
+plt.rcParams["figure.subplot.bottom"] = 0.11
+plt.rcParams["figure.subplot.top"] = 0.88
+plt.rcParams["figure.subplot.wspace"] = 0.2
+plt.rcParams["figure.subplot.hspace"] = 0.2
 
 plt.rcParams["figure.figsize"] = [4.0, 3.0]
 plt.rcParams["figure.dpi"] = 80
