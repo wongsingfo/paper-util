@@ -102,7 +102,7 @@ download_with_retry() {
     return 1
 }
 
-grep -o '"id":"[^"]*"' a.json | cut -d'"' -f4 | sort -n | while read -r id; do
+grep -o '"id":"[^"]*"' a.json | cut -d'"' -f4 | sort -nu | while read -r id; do
     src=$(grep -oE "\"src\":\"[^\"]*\"[^}]*\"id\":\"$id\"" a.json | head -n 1 | grep -oE "\"src\":\"[^\"]*\"" | cut -d'"' -f4)
     if [ -n "$id" ] && [ -n "$src" ]; then
         if [ -f "${id}.jpg" ]; then
